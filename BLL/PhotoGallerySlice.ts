@@ -11,15 +11,12 @@ const getPhotos=createAsyncThunk<string[],void>
 })
 
 
-
 const photoGallerySlice=createSlice({
     name:"photoGallerySlice",
     initialState:{
         getPhotosResponseData:[] as string[]
     },
-    reducers:{
-
-    },
+    reducers:{},
     extraReducers:(builder)=>{
         builder
             .addCase(getPhotos.fulfilled,(state, action)=>{
@@ -28,6 +25,5 @@ const photoGallerySlice=createSlice({
     }
 
 })
-
 export const photoGalleryReducer=photoGallerySlice.reducer
 export const photoGalleryThunks={getPhotos}
