@@ -1,9 +1,9 @@
 {
-  "name": "photo-galery",
+  "name": "photo-gallery",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start -c",
+    "start": "expo start --port 8081 -c",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"

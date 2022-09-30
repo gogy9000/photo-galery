@@ -1,18 +1,10 @@
-import {createApi} from "@reduxjs/toolkit/dist/query/react";
-import {axiosQuery} from "./AxiosQuery";
+import axios, {AxiosResponse} from "axios";
+import {GetPhotoResponseEntityType} from "./types";
 
-export const API = createApi({
-    reducerPath: "API",
-    baseQuery: axiosQuery(
-        {
-            baseUrl: `https://api.unsplash.com`,
-            baseParams:{client_id:"1fWamlTqFgYFMthvievAQj50-btDyH7iTkPSEGXOthI"}
-        }
-    ),
-    endpoints: (build => ({
-        getPhotos: build.query({
-            query: () => ({url: `photos`,method:"get"})
-        })
-    }))
+const instance=axios.create({params:{client_id:"1fWamlTqFgYFMthvievAQj50-btDyH7iTkPSEGXOthI"}})
 
-})
+export const API={
+    getPhotos:()=>instance.get("https://api.unsplash.com/photos").then((response:AxiosResponse<GetPhotoResponseEntityType[]>)=>{
+       return   response.data.map(item=>item.urls.small)
+    })
+}

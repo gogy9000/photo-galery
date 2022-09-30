@@ -1,12 +1,12 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {API} from "../DAL/API";
+import {photoGalleryReducer} from "./PhotoGallerySlice";
 
 export const setupStore=configureStore({
     reducer:{
-        [API.reducerPath]:API.reducer
-    },
-    middleware:getDefaultMiddleware =>
-        getDefaultMiddleware().concat(API.middleware)
+        photoGalleryReducer,
+
+    }
+
 })
 
 export type AppRootStateType =ReturnType<typeof setupStore.getState>
