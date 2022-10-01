@@ -11,7 +11,6 @@ const getPhotos = createAsyncThunk<GetPhotosItemReturnType[], getPhotosParamsTyp
     }
 })
 
-
 const photoGallerySlice = createSlice({
     name: "photoGallerySlice",
     initialState: {
@@ -39,8 +38,8 @@ const photoGallerySlice = createSlice({
                 state.isFetching=false
             })
     }
-
 })
+
 export const photoGalleryReducer = photoGallerySlice.reducer
 export const photoGalleryActions=photoGallerySlice.actions
 export const photoGalleryThunks = {getPhotos}
