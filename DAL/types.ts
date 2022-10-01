@@ -1,4 +1,10 @@
-export type GetPhotoResponseEntityType={
+export type getPhotosParamsType = {
+    page?: number,
+    per_page?: number,
+    order_by?: "latest" | "oldest" | "popular"
+}
+
+export type GetPhotosResponseEntityType ={
     alt_description: string|null
     blur_hash: string
     color: string
@@ -17,4 +23,7 @@ export type GetPhotoResponseEntityType={
     urls: {raw: string, full: string, regular: string, small: string, small_s3:string, thumb: string}
     user: {id: string, updated_at: string, username: string, name: string, first_name: string,instagram_username:string}
     width: number
+}
+export type GetPhotosItemReturnType={
+ author: string, imageUrls: string
 }
