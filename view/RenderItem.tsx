@@ -18,10 +18,10 @@ export const RenderItem: FC<RenderItemPropsType> = memo(({item}) => {
     const navigation = useAppNavigation()
     const {addSelectedPhotoUrl} = useActions()
 
-    const onNavigate = useCallback( () => {
+    const onNavigate = useCallback(() => {
         addSelectedPhotoUrl(item.imageUrls)
         navigation.navigate("SelectedPhoto")
-    },[item.imageUrls])
+    }, [item.imageUrls])
 
     return (
         <Pressable onPress={onNavigate}>

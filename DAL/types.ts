@@ -1,7 +1,7 @@
 export type getPhotosParamsType = {
-    page?: number,
-    per_page?: number,
-    order_by?: "latest" | "oldest" | "popular"
+    page: number,
+    per_page: number,
+    order_by: "latest" | "oldest" | "popular"
 }
 
 export type GetPhotosResponseEntityType ={

@@ -6,13 +6,16 @@ import {HEIGHT} from "../common/variables/Variables";
 import {GetPhotosItemReturnType} from "../DAL/types";
 import {RenderItem} from "./RenderItem";
 
-
 export const Home = () => {
     const photosResponseData = useAppSelector(state => state.photoGalleryReducer.getPhotosResponseData)
     const dispatch = useAppDispatch()
     useEffect(() => {
-        dispatch(photoGalleryThunks.getPhotos({}))
+        dispatch(photoGalleryThunks.getPhotos())
     }, [])
+
+    const onEndReached = () => {
+        dispatch(photoGalleryThunks.getPhotos())
+    }
 
     const renderItem: ListRenderItem<GetPhotosItemReturnType> = ({item}) => {
         return (
@@ -21,7 +24,11 @@ export const Home = () => {
     }
 
     return (
-        <FlashList renderItem={renderItem} data={photosResponseData} estimatedItemSize={HEIGHT / 3}/>
+        <FlashList onEndReachedThreshold={5}
+                   onEndReached={onEndReached}
+                   renderItem={renderItem}
+                   data={photosResponseData}
+                   estimatedItemSize={HEIGHT / 3}/>
     )
 }
 
