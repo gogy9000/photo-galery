@@ -8,10 +8,11 @@ export default function App() {
     return (
         <Provider store={setupStore}>
             <NavigationContainer>
-                    <StatusBar style="auto"/>
+                    <StatusBar style="light"/>
                     <RootScreen/>
             </NavigationContainer>
         </Provider>
     );
 }
+
 
