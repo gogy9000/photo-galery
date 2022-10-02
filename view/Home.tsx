@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../common/customHooks/CustomHooks"
 import {FlashList, ListRenderItem} from "@shopify/flash-list";
 import {HEIGHT} from "../common/variables/Variables";
 import {GetPhotosItemReturnType} from "../DAL/types";
-import {RenderItem} from "./RenderItem";
+import {RenderItemComponent} from "./RenderItemComponent";
 import {ActivityIndicator, StyleSheet} from "react-native";
 
 export const Home = () => {
@@ -22,7 +22,7 @@ export const Home = () => {
 
     const renderItem: ListRenderItem<GetPhotosItemReturnType> = useCallback(({item}) => {
         return (
-            <RenderItem item={item}/>
+            <RenderItemComponent item={item}/>
         )
     }, [photosResponseData])
 
