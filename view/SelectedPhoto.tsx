@@ -1,21 +1,38 @@
-import {Image,StyleSheet} from "react-native";
-import {useActions, useAppSelector} from "../common/customHooks/CustomHooks";
+import {ActivityIndicator, ImageBackground, StyleSheet} from "react-native";
+import {useAppSelector} from "../common/customHooks/CustomHooks";
 import {HEIGHT, WIDTH} from "../common/variables/Variables";
-import {useEffect} from "react";
+import {useCallback, useState} from "react";
 
 export const SelectedPhoto = () => {
-  const selectedPhotoUrl=useAppSelector(state => state.photoGalleryReducer.selectedPhotoUrl)
-  const {addSelectedPhotoUrl}=useActions()
-  useEffect(()=>()=>{addSelectedPhotoUrl(null)})
-  const mutateSelectedPhotoUrl=selectedPhotoUrl?selectedPhotoUrl+`&fit=fillmax&fill=blur&w=${WIDTH}&h=${HEIGHT}`:undefined
+    const [isFetching, setIsFetching] = useState(true)
+    const selectedPhotoUrl = useAppSelector(state => state.photoGalleryReducer.selectedPhotoUrl)
+    const mutateSelectedPhotoUrl = selectedPhotoUrl ?
+        selectedPhotoUrl + `&fit=fillmax&fill=blur&w=${WIDTH}&h=${HEIGHT}`
+        : undefined
+    const onLoadHandler = useCallback(() => {
+        console.log("end")
+        if (isFetching) {
+            setIsFetching(false)
+        }
 
-  return(
-      <Image resizeMode={"contain"} style={styles.image} source={{uri:mutateSelectedPhotoUrl}}/>
-  )
+    }, [isFetching])
+    return (
+        <ImageBackground
+            onLoadEnd={onLoadHandler}
+            resizeMode={"contain"}
+            style={styles.image}
+            source={{uri: mutateSelectedPhotoUrl}}
+        >
+            {isFetching && <ActivityIndicator size={"large"}/>}
+        </ImageBackground>
+
+    )
 }
-const styles=StyleSheet.create({
-  image:{
-    width:WIDTH,
-    height:HEIGHT,
-  }
+const styles = StyleSheet.create({
+    image: {
+        width: WIDTH,
+        height: HEIGHT,
+        justifyContent: "center",
+        alignItems: "center",
+    },
 })
