@@ -6,16 +6,17 @@ import {useCallback, useState} from "react";
 export const SelectedPhoto = () => {
     const [isFetching, setIsFetching] = useState(true)
     const selectedPhotoUrl = useAppSelector(state => state.photoGalleryReducer.selectedPhotoUrl)
+
     const mutateSelectedPhotoUrl = selectedPhotoUrl ?
         selectedPhotoUrl + `&fit=fillmax&fill=blur&w=${WIDTH}&h=${HEIGHT}`
         : undefined
+
     const onLoadHandler = useCallback(() => {
-        console.log("end")
         if (isFetching) {
             setIsFetching(false)
         }
-
     }, [isFetching])
+
     return (
         <ImageBackground
             onLoadEnd={onLoadHandler}

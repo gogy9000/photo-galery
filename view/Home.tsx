@@ -5,6 +5,7 @@ import {FlashList, ListRenderItem} from "@shopify/flash-list";
 import {HEIGHT} from "../common/variables/Variables";
 import {GetPhotosItemReturnType} from "../DAL/types";
 import {RenderItem} from "./RenderItem";
+import {ActivityIndicator, StyleSheet} from "react-native";
 
 export const Home = () => {
     const photosResponseData = useAppSelector(state => state.photoGalleryReducer.getPhotosResponseData)
@@ -24,14 +25,25 @@ export const Home = () => {
     }
 
     return (
-        <FlashList onEndReachedThreshold={5}
-                   onEndReached={onEndReached}
-                   renderItem={renderItem}
-                   data={photosResponseData}
-                   estimatedItemSize={HEIGHT / 3}/>
+        <FlashList
+            onEndReachedThreshold={5}
+            onEndReached={onEndReached}
+            renderItem={renderItem}
+            data={photosResponseData}
+            estimatedItemSize={HEIGHT / 3}
+            ListEmptyComponent={
+                <ActivityIndicator
+                    style={styles.indicator}
+                    size={'large'}/>
+            }
+        />
     )
 }
 
-
+const styles = StyleSheet.create({
+    indicator: {
+        marginTop: HEIGHT * 0.4
+    },
+})
 
 
