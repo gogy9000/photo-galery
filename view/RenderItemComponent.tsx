@@ -20,13 +20,13 @@ export const RenderItemComponent: FC<RenderItemComponentPropsType> = memo(({item
     const {addSelectedPhotoUrl} = useActions()
 
     const onNavigate = useCallback(() => {
-        addSelectedPhotoUrl(item.imageUrls)
+        addSelectedPhotoUrl(item.imageUrl)
         navigation.navigate("SelectedPhoto")
-    }, [item.imageUrls])
+    }, [item.imageUrl])
 
     return (
         <Pressable onPress={onNavigate}>
-            <ImageBackground style={[styles.image]} source={{uri: item.imageUrls + `&w=${WIDTH}&h=${HEIGHT}`}}>
+            <ImageBackground style={[styles.image]} source={{uri: item.imageUrl + `&w=${WIDTH}&h=${HEIGHT}`}}>
                 <View style={styles.authorBar}>
                     <Text style={styles.authorBarText}>
                         Author : {item.author}

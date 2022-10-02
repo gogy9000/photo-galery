@@ -25,5 +25,5 @@ export type GetPhotosResponseEntityType ={
     width: number
 }
 export type GetPhotosItemReturnType={
- author: string, imageUrls: string
+ author: string, imageUrl: string
 }
