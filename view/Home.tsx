@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useCallback, useEffect} from "react";
 import {photoGalleryThunks} from "../BLL/PhotoGallerySlice";
 import {useAppDispatch, useAppSelector} from "../common/customHooks/CustomHooks";
 import {FlashList, ListRenderItem} from "@shopify/flash-list";
@@ -8,21 +8,23 @@ import {RenderItem} from "./RenderItem";
 import {ActivityIndicator, StyleSheet} from "react-native";
 
 export const Home = () => {
+
     const photosResponseData = useAppSelector(state => state.photoGalleryReducer.getPhotosResponseData)
     const dispatch = useAppDispatch()
+
     useEffect(() => {
         dispatch(photoGalleryThunks.getPhotos())
     }, [])
 
-    const onEndReached = () => {
+    const onEndReached = useCallback(() => {
         dispatch(photoGalleryThunks.getPhotos())
-    }
+    }, [])
 
-    const renderItem: ListRenderItem<GetPhotosItemReturnType> = ({item}) => {
+    const renderItem: ListRenderItem<GetPhotosItemReturnType> = useCallback(({item}) => {
         return (
             <RenderItem item={item}/>
         )
-    }
+    }, [photosResponseData])
 
     return (
         <FlashList
