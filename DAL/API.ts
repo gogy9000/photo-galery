@@ -17,7 +17,6 @@ export const API = {
             "https://api.unsplash.com/photos",
             {params: {per_page, page, order_by}})
             .then((response: AxiosResponse<GetPhotosResponseEntityType[]>) => {
-                console.log(response)
                 let returnedData:GetPhotosItemReturnType[]
                 returnedData=response.data.map(item => ({
                     imageUrl: item.urls.raw,
