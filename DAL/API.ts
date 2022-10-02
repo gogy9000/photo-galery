@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {GetPhotosResponseEntityType, getPhotosParamsType} from "./types";
+import {GetPhotosResponseEntityType, getPhotosParamsType, GetPhotosItemReturnType} from "./types";
 
 
 
@@ -17,10 +17,11 @@ export const API = {
             "https://api.unsplash.com/photos",
             {params: {per_page, page, order_by}})
             .then((response: AxiosResponse<GetPhotosResponseEntityType[]>) => {
-                console.log(response)
-                return response.data.map(item => ({
-                    imageUrls: item.urls.raw,
+                let returnedData:GetPhotosItemReturnType[]
+                returnedData=response.data.map(item => ({
+                    imageUrl: item.urls.raw,
                     author: item.user.username
                 }))
+                return returnedData
             })
 }

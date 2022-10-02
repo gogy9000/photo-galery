@@ -19,7 +19,6 @@ const photoGallerySlice = createSlice({
         getPhotosResponseData: [] as GetPhotosItemReturnType[],
         selectedPhotoUrl: null as string | null,
         errors:[] as  SerializedError[],
-        isFetching:true,
         getPhotosParams:{page:1,per_page:29,order_by:"latest"} as getPhotosParamsType
     },
     reducers: {
@@ -29,17 +28,12 @@ const photoGallerySlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getPhotos.pending, (state) => {
-                state.isFetching=true
-            })
             .addCase(getPhotos.fulfilled, (state, action) => {
                 state.getPhotosResponseData.push(...action.payload)
                 state.getPhotosParams.page+=1
-                state.isFetching=false
             })
             .addCase(getPhotos.rejected, (state, action) => {
                 state.errors.push(action.error)
-                state.isFetching=false
             })
     }
 })
